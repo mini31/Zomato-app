@@ -1,31 +1,41 @@
 
 import React from 'react';
 
+import SearchComponent from './SearchComponent.jsx';
+import RestaurantBoxComponent from './RestaurantBoxComponent.jsx';
+
+
+export default class HomeComponent extends React.Component{
+constructor(){
+super();
+this.state={restaurants:[],isUpdate:false};
+
+this.setRestaurantAr=this.setRestaurantAr.bind(this);
+
+}
+
+setRestaurantAr(restAr) {
+this.setState({restaurants:restAr});
+console.log("inside main");
+console.log(this.state.restaurants);
+
+}
 
 
 
-export default class HomeComponent extends React.Component
-{
-	render()
-	{
-	 return(
-	   <div className="container-fluid">
-	       <div className="row">
-	           <div className="col-md-12">
-	               <div className="jumbotron">
-	                   <h2>
-	                       Home components
-	                   </h2>
-	                   <p>
-	                      This is a home component
-	                   </p>
-	                   <p>
-	                       <a className="btn btn-primary btn-large" href="#">Learn more</a>
-	                   </p>
-	               </div>
-	           </div>
-	       </div>
-	   </div>
-	 );
-	}
+
+render(){
+
+return(
+<div>
+
+<SearchComponent restSource={this.setRestaurantAr.bind(this)}/>
+<RestaurantBoxComponent  restAr={this.state.restaurants} isUpdate={this.state.isUpdate}/>
+
+
+</div>
+
+)
+}
+
 }

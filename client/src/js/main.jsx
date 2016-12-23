@@ -15,7 +15,10 @@ import RegisterComponent from './components/RegisterComponent.jsx';
 import RestaurantBoxComponent from './components/RestaurantBoxComponent.jsx';
 import SaveItemComponent from './components/SaveItemComponent.jsx';
 import SearchComponent from './components/SearchComponent.jsx';
-import updateDeleteComponent from './components/updateDeleteComponent.jsx';
+import UpdateDeleteComponent from './components/UpdateDeleteComponent.jsx';
+import MyRestaurantComponent from './components/MyRestaurantComponent.jsx';
+import RestaurantComponent from './components/RestaurantComponent.jsx';
+
 
 class MainComponent extends React.Component{
 
@@ -38,6 +41,7 @@ ReactDOM.render(
          <IndexRoute component={HomeComponent} />
          <Route path="/about" component={AboutComponent}/>
          <Route path="/contact" components={ContactComponent} />
+         <Route path="/MyRestaurantComponent" components={MyRestaurantComponent} />
          <Route path="/login" components={LoginComponent} />
          <Route path="/register" components={RegisterComponent} />
 

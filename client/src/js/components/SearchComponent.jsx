@@ -10,13 +10,13 @@ export default class SearchComponent extends React.Component{
           this.fetchRestaurantsFromExtAPI=this.fetchRestaurantsFromExtAPI.bind(this);
         }
 
-fetchRestaurantDetails(){ 
+fetchRestaurantDetails(){
         var city=this.refs.city.value;
         var cuisine=this.refs.cuisine.value;
         console.log("main-fetchRestaurantDetails : "+city+" "+cuisine);
 
         this.fetchCityFromExternalAPI(city,cuisine);
-    
+
     }
 
 fetchCityFromExternalAPI(city,cuisine) {
@@ -51,13 +51,15 @@ dataType: 'JSON',
 success : function(msg){
 
   var name=msg.restaurants[0].restaurant.name;
-                            
-  
+
+
   var restaurantUrl= msg.restaurants[0].restaurant.url;
    var address=msg.restaurants[0].restaurant.location.address;
     var locality=msg.restaurants[0].restaurant.location.locality;
     console.log(name);
-           
+    console.log(msg.restaurants);
+    this.props.restSource(msg.restaurants);
+
          }.bind(this),
 error: function(err){
 cosnole.log("Main-Error Fetching News");
@@ -69,26 +71,32 @@ cosnole.log("Main-Error Fetching News");
 
 
 
-    
-	render(){       
+
+	render(){
 
             return (
 
-                <div>
-                    
-                    <div className="input-group" id="input-group">
-                        <input type="text" className="form-control" ref="city" placeholder="Enter City"/>
-                         <input type="text" className="form-control" ref="cuisine" placeholder="Enter Cuisine"/>
-                    		<div className="input-group-btn" id="input-group-btn">
-                         	 <button className="btn btn-default" type="button" onClick={this.fetchRestaurantDetails}>
-                       		</button>
-                        	</div>
-                    </div>
+              <div>
+                 <div className="container">
+
+                 <div className="col-md-12 input-group" id="input-group">
+                     <div className="col-md-4">
+                     <input type="text" className="form-control" ref="city" placeholder="Enter City" style={{"margin-top":"100px"}}/>
+                     </div>
+                             <div className="col-md-4">
+                             <input type="text" className="form-control" ref="cuisine" placeholder="Enter Cuisine" style={{"margin-top":"100px"}}/>
+                             </div>
+                                 <div className="col-md-4 input-group-btn" id="input-group-btn">
+                                  <button className="btn btn-default" type="button"  onClick={this.fetchRestaurantDetails}  style={{"margin-top":"100px"}}>Click Me!
+                                 </button>
+                                 </div>
+                 </div>
 
                 </div>
+             </div>
 
              )
-    }   
+    }
 
 
-} 
+}

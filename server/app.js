@@ -8,8 +8,9 @@ var bodyParser = require('body-parser');
 
 var user = require('./routes/user');
 var User=require('./models/user');
-var register=require('./routes/register');
 var restaurantDetails = require('./routes/restaurantDetails');
+var register = require('./routes/register');
+
 
 //passport
 var passport = require("passport");
@@ -53,6 +54,7 @@ app.use(passport.session());
 app.use(connectflash());
 app.use(require('express-session')({ secret: 'accesskey'}));
 
+
 //db connect
 var mongoose = require('mongoose');
 
@@ -81,7 +83,8 @@ app.use(express.static(path.join(__dirname, '../client/assets')));
 
 
 app.use('/user', user);
-app.use('/register', register);
+app.use('/restaurantDetails',restaurantDetails);
+app.use('/register',register);
 
 
 // catch 404 and forward to error handler

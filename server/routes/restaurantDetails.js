@@ -7,7 +7,7 @@ var Restaurant=require("../models/restaurant.js");
 
 
 //http://localhost:8091/restaurantdetails/updateRestaurant
-router.put('/updateRestaurant',isLoggedIn,function(req, res){
+router.put('/updateRestaurant',function(req, res){
   if(req.body)
   {
     request1=req.body.id;
@@ -28,7 +28,7 @@ router.put('/updateRestaurant',isLoggedIn,function(req, res){
 
 
 //http://localhost:8091/restaurantdetails/deleteRestaurant
-router.delete('/deleteRestaurant',isLoggedIn,function(req, res, next) {
+router.delete('/deleteRestaurant',function(req, res, next) {
 
   console.log("deleteRestaurant");
   Restaurant.remove({"id": req.body.id}, function(err) {
@@ -65,19 +65,19 @@ router.get('/viewRestaurant',function(req, res, next) {
 
 
 //http://localhost:8091/restaurantdetails/saveRestaurant
-router.post('/saveRestaurant',isLoggedIn,function(req, res, next) {
+router.post('/saveRestaurant',function(req, res, next) {
 
-  console.log("saveRestaurant");
+  console.log("saveRestaurant123");
   console.log(req.body);
+  console.log(req.body.restaurant_address);
   var restaurantdetail=new Restaurant();
-  restaurantdetail.id=req.body.id;
-  restaurantdetail.name=req.body.name;
+  restaurantdetail.id=req.body.restaurant_id;
+  restaurantdetail.name=req.body.restaurant_name;
   restaurantdetail.url=req.body.url;
-  restaurantdetail.location=[{"address":req.body.location.address,"locality":req.body.location.locality,"city":req.body.location.city,"zipcode":req.body.location.zipcode,"country_id":req.body.location.country_id}];
-  restaurantdetail.cuisines=req.body.cuisines;
-  restaurantdetail.thumb=req.body.thumb;
-  restaurantdetail.menu_url=req.body.menu_url;
-  restaurantdetail.user_rating=[{"aggregate_rating":req.body.user_rating.aggregate_rating}];
+  restaurantdetail.location=req.body.restaurant_address;
+  restaurantdetail.cuisines=req.body.cuisine_name;
+  restaurantdetail.featured_image=req.body.featured_image;
+
 
 
   //save
@@ -99,13 +99,5 @@ router.post('/saveRestaurant',isLoggedIn,function(req, res, next) {
 
 });
 
-function isLoggedIn (req, res, next) {
-if(req.isAuthenticated()){
-return next()
-;}
-else {
- res.json('not authenticated please log in ');
-}
-};
 
 module.exports = router;
